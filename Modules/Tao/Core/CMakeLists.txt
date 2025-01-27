@@ -1,4 +1,4 @@
-set(TARGET_NAME "LibEx")
+set(TARGET_NAME "Core")
 get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 get_filename_component(NAMESPACE ${PARENT_DIR} NAME)
 
@@ -30,9 +30,10 @@ set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Modules/${NAMESPACE})
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/WX->")
 target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
-
+find_package(spdlog CONFIG REQUIRED)
 # Link dependencies    
 target_link_libraries(${TARGET_NAME} PUBLIC
+spdlog::spdlog
           )
 
 target_include_directories(
